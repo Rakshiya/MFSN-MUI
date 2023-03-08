@@ -4,6 +4,7 @@ import Home from '../views/Home';
 import Login from '../views/Auth/Login';
 import Register from '../views/Auth/Register';
 import Dashboard from '../views/Web/Dashboard/Dashboard';
+import AppSidebar from '../Components/AppSidebar';
 
 function Routing(props) {
     return (
@@ -13,6 +14,7 @@ function Routing(props) {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/sidebar" element={<AppSidebar />} />
             </Routes>
         </BrowserRouter>
     );
