@@ -5,6 +5,8 @@ import Login from '../views/Auth/Login';
 import Register from '../views/Auth/Register';
 import Dashboard from '../views/Web/Dashboard/Dashboard';
 import AppSidebar from '../Components/AppSidebar';
+import CompanyPanel from '../views/Web/CompanyPanel/CompanyPanel';
+import HotLeads from '../views/Web/ManageLeadsPanel/HotLeads';
 
 function Routing(props) {
     return (
@@ -15,6 +17,8 @@ function Routing(props) {
                 <Route path="/register" element={<Register />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/sidebar" element={<AppSidebar />} />
+                <Route path="/companypanel" element={<CompanyPanel/>} />
+                <Route path="/hotleads" element={<HotLeads/>}/>
             </Routes>
         </BrowserRouter>
     );
