@@ -286,7 +286,7 @@ function Register(props) {
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                                 >
-                                Sign Up
+                                Register Now
                             </Button>
                             <Grid container justifyContent="center">
                                 <Grid item>

@@ -18,8 +18,8 @@ function Routing(props) {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/sidebar" element={<AppSidebar />} />
                 <Route path="/companypanel" element={<CompanyPanel/>} />
-                <Route path="/hotleads" element={<HotLeads/>}/>
-                <Route path="/Details" element={<Details/>}/>
+                <Route path="/manageleads" element={<HotLeads/>}/>
+                <Route path="/details" element={<Details/>}/>
             </Routes>
         </BrowserRouter>
     );
