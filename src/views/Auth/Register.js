@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container,Box,Grid,Paper,styled,TextField,Button,Card,CardActions,CardContent,Typography, Stack   } from '@mui/material';
+import {Container,Box,Grid,Paper,styled,TextField,Button,Card,Link,CardContent,Typography, Stack   } from '@mui/material';
 import { textAlign } from '@mui/system';
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -99,44 +99,205 @@ function Register(props) {
                 <Item>
             <h1 style={{color:"blue",fontSize:"40px"}}>Register Now</h1>
                 <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} md={6} lg={6}>
                         <img src={require("../../assets/images/register.png")}/>
                     </Grid>
-                    <Grid item xs={6}>
-                        <Box component="form" sx={{'& > :not(style)': { m: 1, width: '40ch' },}} noValidate autoComplete="off">
-                            <TextField id="outlined-basic" label="First Name" variant="outlined" size="small"/>
-                            <TextField id="outlined-basic" label="Last Name" variant="outlined" size="small"/>
+                    {/* <Grid item xs={6}> */}
+                        
+                        <Box component="form" noValidate sx={{ mt: 1 }}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                    autoComplete="given-name"
+                                    name="firstName"
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="firstName"
+                                    label="First Name"
+                                    autoFocus
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="lastName"
+                                    label="Last Name"
+                                    name="lastName"
+                                    autoComplete="family-name"
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={2} mt={1}>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                    autoComplete="given-name"
+                                    name="firstName"
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="firstName"
+                                    label="Name of Business"
+                                    autoFocus
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="lastName"
+                                    label="Company Website (URL)"
+                                    name="lastName"
+                                    autoComplete="family-name"
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={2} mt={1}>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                    autoComplete="given-name"
+                                    name="firstName"
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="firstName"
+                                    label="Title"
+                                    autoFocus
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="lastName"
+                                    label="Year Business Started"
+                                    name="lastName"
+                                    autoComplete="family-name"
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={2} mt={1}>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                    autoComplete="given-name"
+                                    name="firstName"
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="firstName"
+                                    label="Email"
+                                    autoFocus
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="lastName"
+                                    label="Phone Number"
+                                    name="lastName"
+                                    autoComplete="family-name"
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={2} mt={1}>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                    autoComplete="given-name"
+                                    name="firstName"
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="firstName"
+                                    label="Street Address"
+                                    autoFocus
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="lastName"
+                                    label="MyFreeScoreNow Referral Code"
+                                    name="lastName"
+                                    autoComplete="family-name"
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={2} mt={1}>
+                                <Grid item xs={12} sm={6} lg={4}>
+                                    <TextField
+                                    autoComplete="given-name"
+                                    name="firstName"
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="firstName"
+                                    label="City"
+                                    autoFocus
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6} lg={4}>
+                                    <TextField
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="lastName"
+                                    label="State"
+                                    name="lastName"
+                                    autoComplete="family-name"
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6} lg={4}>
+                                    <TextField
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="lastName"
+                                    label="Zip Code"
+                                    name="lastName"
+                                    autoComplete="family-name"
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={2} mt={1}>
+                                <Grid item xs={12} sm={12}>
+                                    <TextField
+                                    autoComplete="given-name"
+                                    name="firstName"
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    id="firstName"
+                                    label="Name of the software to be used to work on credit reports"
+                                    autoFocus
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                                >
+                                Sign Up
+                            </Button>
+                            <Grid container justifyContent="center">
+                                <Grid item>
+                                    <Link href="#" variant="body2">
+                                    Already have an account? Sign in
+                                    </Link>
+                                </Grid>
+                            </Grid>
                         </Box>
-                        <Box component="form" sx={{'& > :not(style)': { m: 1, width: '40ch' },}} noValidate autoComplete="off">
-                            <TextField id="outlined-basic" label="Name of Business" variant="outlined" size="small"/>
-                            <TextField id="outlined-basic" label="Company Website (URL)" variant="outlined" size="small"/>
-                        </Box>
-                        <Box component="form" sx={{'& > :not(style)': { m: 1, width: '40ch' },}} noValidate autoComplete="off">
-                            <TextField id="outlined-basic" label="title" variant="outlined" size="small"/>
-                            <TextField id="outlined-basic" label="Year Business Started" variant="outlined" size="small"/>
-                        </Box>
-                        <Box component="form" sx={{'& > :not(style)': { m: 1, width: '40ch' },}} noValidate autoComplete="off">
-                            <TextField id="outlined-basic" label="Email" variant="outlined" size="small"/>
-                            <TextField id="outlined-basic" label="Phone Number" variant="outlined" size="small"/>
-                        </Box>
-                        <Box component="form" sx={{'& > :not(style)': { m: 1, width: '40ch' },}} noValidate autoComplete="off">
-                            <TextField id="outlined-basic" label="Street Address" variant="outlined" size="small"/>
-                            <TextField id="outlined-basic" label="MyFreeScoreNow Referral Code" variant="outlined" size="small"/>
-                        </Box>
-                        <Box component="form" sx={{'& > :not(style)': { m: 1, width: '26ch' },}} noValidate autoComplete="off">
-                            <TextField id="outlined-basic" label="City" variant="outlined" size="small"/>
-                            <TextField id="outlined-basic" label="State" variant="outlined" size="small"/>
-                            <TextField id="outlined-basic" label="Zip Code" variant="outlined" size="small"/>
-                        </Box>
-                        <Box component="form" sx={{'& > :not(style)': { m: 1, width: '82ch' },}} noValidate autoComplete="off">
-                            <TextField id="outlined-basic" label="Name of the software to be used to work on credit reports" variant="outlined" size="small"/>
-                        </Box>
-                        <Box component="form" sx={{'& > :not(style)': { m: 1, width: '82ch' },}}>
-                            <Button variant="contained">Register</Button>
-                        </Box>
-                            <span style={{textAlign:"center"}}>Already have an account ?<a href=""> Login</a></span>
                     </Grid>
-                </Grid>
+                {/* </Grid> */}
                 </Item>
             </Box>
         </div>

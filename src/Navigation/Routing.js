@@ -7,7 +7,7 @@ import Dashboard from '../views/Web/Dashboard/Dashboard';
 import AppSidebar from '../Components/AppSidebar';
 import CompanyPanel from '../views/Web/CompanyPanel/CompanyPanel';
 import HotLeads from '../views/Web/ManageLeadsPanel/HotLeads';
-
+import Details from '../views/Web/ManageLeadsPanel/Details';
 function Routing(props) {
     return (
         <BrowserRouter>
@@ -19,6 +19,7 @@ function Routing(props) {
                 <Route path="/sidebar" element={<AppSidebar />} />
                 <Route path="/companypanel" element={<CompanyPanel/>} />
                 <Route path="/hotleads" element={<HotLeads/>}/>
+                <Route path="/Details" element={<Details/>}/>
             </Routes>
         </BrowserRouter>
     );
