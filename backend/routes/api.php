@@ -36,14 +36,16 @@ Route::post('forgot-password',[AuthController::class,'forgotPassword']);
 Route::post('checkPasswordToken',[AuthController::class,'checkPasswordToken']);
 Route::post('reset-password', [AuthController::class,'resetPassword']);
 
+//User Authenticatio Routes Started Here
+Route::post('login', [AuthController::class,'login']);
+Route::post('register', [ReferenceController::class,'register']);
+
 Route::group(['middleware'=>'api'],function(){
 
     //Common Routes Started Here
     Route::get('fetchCompanyList',[CompanyMaster::class,'fetchCompanyList']);
 
-    //User Authenticatio Routes Started Here
-    Route::post('login', [AuthController::class,'login']);
-    Route::post('register', [ReferenceController::class,'register']);
+
     
 
     //Manage Leads Routes Started Here
