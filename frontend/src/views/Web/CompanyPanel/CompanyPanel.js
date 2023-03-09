@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-
+import DefaultLayout from '../../../Components/DefaultLayout';
 //MRT Imports
 import MaterialReactTable from 'material-react-table';
 
@@ -137,7 +137,7 @@ function CompanyPanel() {
         ],
         [],
       );
-    
+      function ContentLayout() {
     return (
         <MaterialReactTable
         columns={columns}
@@ -148,7 +148,7 @@ function CompanyPanel() {
         enablePinning
         enableRowActions
         enableRowSelection
-        initialState={{ showColumnFilters: true }}
+        initialState={{ showColumnFilters: false }}
         positionToolbarAlertBanner="bottom"
         renderDetailPanel={({ row }) => (
           <Box
@@ -251,6 +251,13 @@ function CompanyPanel() {
         }}
       />
     );
-  };
+    }
+     
+    return(
+        <div>
+            <DefaultLayout content={<ContentLayout />} />
+        </div>
+    );
+}
 
 export default CompanyPanel;

@@ -3,10 +3,7 @@ import {
   Box
 } from '@mui/material';
 import { data } from '../../views/Web/CompanyPanel/makeData';
-
 function UserListColumns(){
-
-
 const UserListColumns = useMemo(
     () => [
       {
@@ -94,25 +91,6 @@ const UserListColumns = useMemo(
             sortingFn: 'datetime',
             Cell: ({ cell }) => cell.getValue()?.toLocaleDateString(), //render Date as a string
             Header: ({ column }) => <em>{column.columnDef.header}</em>, //custom header markup
-            //Custom Date Picker Filter from @mui/x-date-pickers
-            // Filter: ({ column }) => (
-            //   <LocalizationProvider dateAdapter={AdapterDayjs}>
-            //     <DatePicker
-            //       onChange={(newValue) => {
-            //         column.setFilterValue(newValue);
-            //       }}
-            //       renderInput={(params) => (
-            //         <TextField
-            //           {...params}
-            //           helperText={'Filter Mode: Lesss Than'}
-            //           sx={{ minWidth: '120px' }}
-            //           variant="standard"
-            //         />
-            //       )}
-            //       value={column.getFilterValue()}
-            //     />
-            //   </LocalizationProvider>
-            // ),
           },
         ],
       },
