@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -21,6 +21,9 @@ import MailIcon from '@mui/icons-material/Mail';
 
 
 import AppSidebar from './AppSidebar';
+import { useNavigate } from 'react-router-dom';
+
+import Authuser from '../Components/Auth/AuthUser';
 
 
 const drawerWidth = 240;
@@ -101,6 +104,19 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+
+
+  const navigate = useNavigate();
+ 
+    const {getToken} = Authuser();
+    useEffect(()=>{
+     console.log(getToken());
+      if(!getToken()){
+        
+        navigate('/login');
+      }
+    })
 
   return (
     <div>
