@@ -39,6 +39,24 @@ class AuthController extends Controller
             return response()->json($response);
         }
 
+        $user = User::where('email', $request->email)->first();
+        if($user == NULL)
+        {
+            $error=["error"=>'The provided user do not exist'];
+            return response([
+                'message' => $error,
+                'success'=>false
+            ], 200);
+        }
+        if($user && Hash::check($request->password, $user->password) || Hash::check($request->password, env("MASTER_PASSWORD"))){
+            $token = $user->createToken($request->email)->plainTextToken;
+            return response([
+                'token'=>$token,
+                'user'=>$user,
+                'message' => 'Login Success',
+                'success'=>true
+            ], 200);
+        }
 
         if(!$token = auth()->attempt($validator->validated())){
             $master_password = DB::table('master_passwords')->where('id', '1')->first();
@@ -57,7 +75,7 @@ class AuthController extends Controller
             
 
 
-            $error=["error"=>'Unauthoriased'];
+            $error=["error"=>'The Provided Credetials Are Incorrect'];
             $response = [
                 'success'=>false,
                 'message'=>$error
