@@ -1,8 +1,59 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
+import {useNavigate } from "react-router-dom";
 import { Box, Grid,Typography,TextField, Checkbox, Button, Stack } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 import LoginHeader from '../../Components/LoginHeader';
+import AuthUser from "../../Components/Auth/AuthUser";
 
 function Login(props) {
+
+    const navigate = useNavigate();
+    const [email,setEmail] = useState();
+    const [password,setPassword] = useState();
+    const { http, getToken, setToken } = AuthUser();
+    const [loading, setLoading]=useState('');
+    const [error, setError]=useState();
+    const [fieldError, setFieldError] = useState([]);
+
+
+  //Check Login
+  useEffect(() => {
+    if (getToken()) {
+      navigate("/dashboard");
+    }
+  });
+
+  //Define LoginFunction
+  const LoginSubmit = () => {
+    
+    setLoading(<CircularProgress />);
+    document.getElementById("submitbtn").classList.add("d-none");
+
+    //Call API for login
+    http
+      .post("/login", {
+        email: email,
+        password: password,
+      })
+      .then((res) => {
+        if (res.data.success === true) {
+          document.getElementById("submitbtn").classList.remove("d-none");
+          setToken(res.data.user, res.data.token);
+        } else {
+          document.getElementById("submitbtn").classList.remove("d-none");
+          setFieldError(res.data.message);
+          setError(res.data.message.error);
+          setLoading('');
+        }
+      })
+      .catch((error) => {
+        document.getElementById("submitbtn").classList.remove("d-none");
+        setError(error.message);
+        setLoading('');
+      });
+  }; //Close LoginSubmit Function
+
+
     return (
         <Box sx={{ flexGrow: 1,backgroundColor:'#f9f9f9'  }}> 
             <LoginHeader />
@@ -20,6 +71,7 @@ function Login(props) {
                         <Typography variant="h4" gutterBottom>
                             User Login
                         </Typography>
+                        <p className="text text-danger">{error}</p>
                         <Box
                             component="form"
                             sx={{
@@ -29,8 +81,10 @@ function Login(props) {
                             autoComplete="off"
                         >
                             <div>                            
-                                <TextField  size="small" id="outlined-basic" label="Email Address" variant="outlined" />
-                                <TextField  size="small" id="outlined-basic" label="Password" variant="outlined" />
+                                <TextField  size="small" id="outlined-basic" label="Email Address" variant="outlined" onChange={(e) => {setEmail(e.target.value)}}/>
+                                <p className="text text-danger">{fieldError.email}</p>
+                                <TextField  size="small" id="outlined-basic" label="Password" variant="outlined" onChange={(e) => {setPassword(e.target.value)}} />
+                                <p className="text text-danger">{fieldError.password}</p>
                             </div>
                             <div>
                                 {/* <Stack > */}
@@ -41,7 +95,7 @@ function Login(props) {
                                 {/* </Stack> */}
                             </div>
                             <div>
-                                <Button fullWidth variant="contained">Login Now {'<<'}</Button>
+                                <Button fullWidth variant="contained" id="submitbtn" onClick={()=>{LoginSubmit()}} >Login Now {'<<'}</Button>
                             </div>
                             <div>
                                 <p>Not an Affiliate Yet? <a>Join Here </a></p>
