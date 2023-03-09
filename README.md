@@ -1,1 +1,1 @@
-# MFSN-MUI
+# MFSN-Folder structure
