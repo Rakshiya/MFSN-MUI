@@ -1,6 +1,9 @@
 import React from 'react';
 import {Container,Box,Grid,Paper,styled,TextField,Button,Card,Link,CardContent,Typography, Stack   } from '@mui/material';
 import { textAlign } from '@mui/system';
+import * as Yup from 'yup';
+import {Formik} from 'formik';
+
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -9,6 +12,40 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
   }));
 function Register(props) {
+
+
+
+    const SignupSchema = Yup.object().shape({
+        firstName: Yup.string()
+            .min(2, 'Too Short!')
+            .max(50, 'Too Long!')
+            .required('Please enter your full Name.'),
+
+            lastName: Yup.string()
+            .min(2, 'Too Short!')
+            .max(50, 'Too Long!')
+            .required('Please enter your last Name.'),
+
+            Email: Yup.string()
+            .email('Invalid email format.')
+            .required('Please enter your email address.'),
+
+            PhoneNumber: Yup.string()
+            .min(10,'Must be 10 digits.')
+            .max(10,'Must be 10 digits.')
+            .required('Please enter your mobile number.'),
+
+            ZipCode: Yup.string()
+            .min(6, 'Must be in 6 digits.')
+            .max(6, 'Wrong pin code.')
+            .required('Please enter pin code.'),
+        
+        
+        
+    });
+
+
+
     return (
         <div>
             <Box>
@@ -97,197 +134,293 @@ function Register(props) {
             </Box>
             <Box sx={{ width: '100%' }}>
                 <Item>
+
+  
             <h1 style={{color:"blue",fontSize:"40px"}}>Register Now</h1>
                 <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     <Grid item xs={12} md={6} lg={6}>
                         <img src={require("../../assets/images/register.png")}/>
                     </Grid>
                     {/* <Grid item xs={6}> */}
+                                            
+                        <Box noValidate sx={{ mt: 1 }}>
                         
-                        <Box component="form" noValidate sx={{ mt: 1 }}>
-                            <Grid container spacing={2}>
+                        <Formik 
+                                initialValues={{
+                                             firstName:'',
+                                            lastName:'',
+                                            NameofBusiness:'',
+                                            CompanyWebsite:'',
+                                            Title:'',
+                                            YearBusinessStarted:'',
+                                            Email:'',
+                                            PhoneNumber:'',
+                                            StreetAddress:'',
+                                            MyFreeScoreNowReferralCode:'',
+                                            City:'',
+                                            State:'',
+                                            ZipCode:'',
+                                            SoftwareUsed:''     
+                                    
+                                                         
+                                }}
+                                validationSchema={SignupSchema}
+                                // onSubmit={() => { console.log("submit!"); }}
+                                onSubmit={(values,errors) => {
+                                    console.log('hi'+JSON.stringify(values));
+                                    alert('hi');
+                                }}
+                                
+                            >
+                                
+                                {({values,errors,touched,handleChange,handleBlur,setFieldTouched,isValid,handleSubmit,setFieldValue,setFieldError}) =>(
+                                <div>
+
+                                       
+                                        <Grid container spacing={2}>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                     autoComplete="given-name"
                                     name="firstName"
-                                    required
+                                    onChange={handleChange('firstName')}
+                                    value={values.firstName}
+                                    onBlur={handleBlur('firstName')}
                                     fullWidth
                                     size="small"
                                     id="firstName"
                                     label="First Name"
-                                    autoFocus
+                                    
                                     />
+                                    {touched.firstName && errors.firstName ? <div className='error'>{errors.firstName}</div> : null}
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
-                                    required
+                                    
                                     fullWidth
                                     size="small"
                                     id="lastName"
                                     label="Last Name"
                                     name="lastName"
+                                    onChange={handleChange('lastName')}
+                                    value={values.lastName}
+                                    onBlur={ handleBlur('lastName')}
                                     autoComplete="family-name"
                                     />
+                                    { touched.lastName &&  errors.lastName ? <div className='error'>{ errors.lastName}</div> : null}
                                 </Grid>
                             </Grid>
                             <Grid container spacing={2} mt={1}>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                     autoComplete="given-name"
-                                    name="firstName"
-                                    required
+                                    name="NameofBusiness"
+                                    onChange={ handleChange('NameofBusiness')}
+                                    value={ values.NameofBusiness}
+                                    onBlur={ handleBlur('NameofBusiness')}
                                     fullWidth
                                     size="small"
-                                    id="firstName"
+                                    id="NameofBusiness"
                                     label="Name of Business"
-                                    autoFocus
+                                    
                                     />
+                                    { touched.NameofBusiness &&  errors.NameofBusiness ? <div className='error'>{ errors.NameofBusiness}</div> : null}
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
-                                    required
+                                    
                                     fullWidth
                                     size="small"
-                                    id="lastName"
+                                    id="CompanyWebsite"
                                     label="Company Website (URL)"
-                                    name="lastName"
+                                    name="CompanyWebsite"
+                                    onChange={ handleChange('CompanyWebsite')}
+                                    value={ values.CompanyWebsite}
+                                    onBlur={ handleBlur('CompanyWebsite')}
                                     autoComplete="family-name"
                                     />
+                                    { touched.CompanyWebsite &&  errors.CompanyWebsite ? <div className='error'>{ errors.CompanyWebsite}</div> : null}
                                 </Grid>
                             </Grid>
                             <Grid container spacing={2} mt={1}>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                     autoComplete="given-name"
-                                    name="firstName"
-                                    required
+                                    name="Title"
+                                    onChange={ handleChange('Title')}
+                                    value={ values.Title}
+                                    onBlur={ handleBlur('Title')}
                                     fullWidth
                                     size="small"
-                                    id="firstName"
+                                    id="Title"
                                     label="Title"
-                                    autoFocus
+                                    
                                     />
+                                    { touched.Title &&  errors.Title ? <div className='error'>{ errors.Title}</div> : null}
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
-                                    required
+                                    
                                     fullWidth
                                     size="small"
-                                    id="lastName"
+                                    id="YearBusinessStarted"
                                     label="Year Business Started"
-                                    name="lastName"
+                                    name="YearBusinessStarted"
+                                    onChange={ handleChange('YearBusinessStarted')}
+                                    value={ values.YearBusinessStarted}
+                                    onBlur={ handleBlur('YearBusinessStarted')}
                                     autoComplete="family-name"
                                     />
+                                    { touched.YearBusinessStarted &&  errors.YearBusinessStarted ? <div className='error'>{ errors.YearBusinessStarted}</div> : null}
                                 </Grid>
                             </Grid>
                             <Grid container spacing={2} mt={1}>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                     autoComplete="given-name"
-                                    name="firstName"
-                                    required
+                                    name="Email"
+                                    onChange={ handleChange('Email')}
+                                    value={ values.Email}
+                                    onBlur={ handleBlur('Email')}
                                     fullWidth
                                     size="small"
-                                    id="firstName"
+                                    id="Email"
                                     label="Email"
-                                    autoFocus
+                                    
                                     />
+                                    { touched.Email &&  errors.Email ? <div className='error'>{ errors.Email}</div> : null}
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
-                                    required
+                                    type="number"
                                     fullWidth
                                     size="small"
-                                    id="lastName"
+                                    id="PhoneNumber"
                                     label="Phone Number"
-                                    name="lastName"
+                                    name="PhoneNumber"
+                                    onChange={ handleChange('PhoneNumber')}
+                                    value={ values.PhoneNumber}
+                                    onBlur={ handleBlur('PhoneNumber')}
                                     autoComplete="family-name"
                                     />
+                                    { touched.PhoneNumber &&  errors.PhoneNumber ? <div className='error'>{ errors.PhoneNumber}</div> : null}
                                 </Grid>
                             </Grid>
                             <Grid container spacing={2} mt={1}>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                     autoComplete="given-name"
-                                    name="firstName"
-                                    required
+                                    name="StreetAddress"
+                                    onChange={ handleChange('StreetAddress')}
+                                    value={ values.StreetAddress}
+                                    onBlur={ handleBlur('StreetAddress')}
                                     fullWidth
                                     size="small"
-                                    id="firstName"
+                                    id="StreetAddress"
                                     label="Street Address"
-                                    autoFocus
+                                    
                                     />
+                                    { touched.StreetAddress &&  errors.StreetAddress ? <div className='error'>{ errors.StreetAddress}</div> : null}
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
-                                    required
+                                    
                                     fullWidth
                                     size="small"
-                                    id="lastName"
+                                    id="MyFreeScoreNowReferralCode"
                                     label="MyFreeScoreNow Referral Code"
-                                    name="lastName"
+                                    name="MyFreeScoreNowReferralCode"
+                                    onChange={ handleChange('MyFreeScoreNowReferralCode')}
+                                    value={ values.MyFreeScoreNowReferralCode}
+                                    onBlur={ handleBlur('MyFreeScoreNowReferralCode')}
                                     autoComplete="family-name"
                                     />
+                                    { touched.MyFreeScoreNowReferralCode &&  errors.MyFreeScoreNowReferralCode ? <div className='error'>{ errors.MyFreeScoreNowReferralCode}</div> : null}
                                 </Grid>
                             </Grid>
                             <Grid container spacing={2} mt={1}>
                                 <Grid item xs={12} sm={6} lg={4}>
                                     <TextField
                                     autoComplete="given-name"
-                                    name="firstName"
-                                    required
+                                    name="City"
+                                    onChange={ handleChange('City')}
+                                    value={ values.City}
+                                    onBlur={ handleBlur('City')}
                                     fullWidth
                                     size="small"
-                                    id="firstName"
+                                    id="City"
                                     label="City"
-                                    autoFocus
+                                    
                                     />
+                                    { touched.City &&  errors.City ? <div className='error'>{ errors.City}</div> : null}
                                 </Grid>
                                 <Grid item xs={12} sm={6} lg={4}>
                                     <TextField
-                                    required
+                                    
                                     fullWidth
                                     size="small"
-                                    id="lastName"
+                                    id="State"
                                     label="State"
-                                    name="lastName"
+                                    name="State"
+                                    onChange={ handleChange('State')}
+                                    value={ values.State}
+                                    onBlur={ handleBlur('State')}
                                     autoComplete="family-name"
                                     />
+                                    { touched.State &&  errors.State ? <div className='error'>{ errors.State}</div> : null}
                                 </Grid>
                                 <Grid item xs={12} sm={6} lg={4}>
                                     <TextField
-                                    required
+                                    type="number"
                                     fullWidth
                                     size="small"
-                                    id="lastName"
+                                    id="ZipCode"
                                     label="Zip Code"
-                                    name="lastName"
+                                    name="ZipCode"
+                                    onChange={ handleChange('ZipCode')}
+                                    value={ values.ZipCode}
+                                    onBlur={ handleBlur('ZipCode')}
                                     autoComplete="family-name"
                                     />
+                                    { touched.ZipCode &&  errors.ZipCode ? <div className='error'>{ errors.ZipCode}</div> : null}
                                 </Grid>
                             </Grid>
                             <Grid container spacing={2} mt={1}>
                                 <Grid item xs={12} sm={12}>
                                     <TextField
                                     autoComplete="given-name"
-                                    name="firstName"
-                                    required
+                                    name="SoftwareUsed"
+                                    onChange={ handleChange('SoftwareUsed')}
+                                    value={ values.SoftwareUsed}
+                                    onBlur={ handleBlur('SoftwareUsed')}
                                     fullWidth
                                     size="small"
-                                    id="firstName"
+                                    id="SoftwareUsed"
                                     label="Name of the software to be used to work on credit reports"
-                                    autoFocus
+                                    
                                     />
+                                    { touched.SoftwareUsed &&  errors.SoftwareUsed ? <div className='error'>{ errors.SoftwareUsed}</div> : null}
                                 </Grid>
                             </Grid>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                                >
-                                Register Now
-                            </Button>
+                                        <Button
+                                        type="submit"
+                                        onClick={handleSubmit}
+                                        fullWidth
+                                        variant="contained"
+                                        
+                                        sx={{ mt: 3, mb: 2 }}
+                                        >
+                                        Register Now
+                                    </Button>
+                                </div>
+
+                                )}
+                                
+                            </Formik>
+                        
+ 
+                          
+
+                          
                             <Grid container justifyContent="center">
                                 <Grid item>
                                     <Link href="#" variant="body2">
@@ -295,9 +428,14 @@ function Register(props) {
                                     </Link>
                                 </Grid>
                             </Grid>
+                           
                         </Box>
+                   
                     </Grid>
                 {/* </Grid> */}
+   
+
+
                 </Item>
             </Box>
         </div>
