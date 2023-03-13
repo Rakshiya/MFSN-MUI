@@ -284,24 +284,25 @@ class ReferralProgramController extends Controller
     //Fetch Referred List
     public $q;
     public function fetchReferredList($id,$search,$perPage){
-       
+        
         $referral_code = Company_master::select("company_masters.referral_code")
         ->leftJoin('users', 'users.company_id', '=' , 'company_masters.company_id')
         ->where('company_masters.company_status',1)
         ->where('users.id',$id)
         ->first();
 
+
         $this->q= $search!='null'?$search:'';
 
-        $referred_list = Company_master::select("company_masters.*",
-        "reference_affiliates.status_id","reference_affiliates.first_name","reference_affiliates.last_name","reference_affiliates.email","reference_affiliates.created_at AS applied_date", "reference_affiliate_status_master.status_name")
+        $referred_list = Company_master::select("company_masters.*","users.id",
+        "reference_affiliates.status_id","reference_affiliates.first_name","reference_affiliates.last_name","reference_affiliates.email","reference_affiliates.phone_no","reference_affiliates.created_at AS applied_date", "reference_affiliate_status_master.status_name")
         ->leftJoin('reference_affiliates', 'reference_affiliates.company_id', '=' ,'company_masters.company_id')
         ->leftJoin('users', 'users.company_id', '=' ,'company_masters.company_id')
         ->leftJoin('reference_affiliate_status_master', 'reference_affiliate_status_master.status_id' ,'=','reference_affiliates.status_id')
         ->where(function($query){
             $query->orWhere('reference_affiliates.first_name', 'LIKE', "%$this->q%");
         })        
-        ->where('referred_by',$referral_code->referral_code)
+        ->where('referral_code',$referral_code->referral_code)
         ->paginate($search=='null'?$perPage:'');
 
         return response()->json($referred_list);   
