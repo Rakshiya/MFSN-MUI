@@ -31,7 +31,7 @@ class CreateCompanyBankDetailsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('company_master_id')->references('id')->on('company_master');
+            // $table->foreign('company_master_id')->references('id')->on('company_master');
         });
     }
 

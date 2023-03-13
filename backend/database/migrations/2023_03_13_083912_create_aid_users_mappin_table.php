@@ -24,8 +24,8 @@ class CreateAidUsersMappinTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('aid_master_id')->references('id')->on('aid_master');
-            $table->foreign('users_id')->references('id')->on('users');
+            // $table->foreign('aid_master_id')->references('id')->on('aid_master');
+            // $table->foreign('users_id')->references('id')->on('users');
         });
     }
 

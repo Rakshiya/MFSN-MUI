@@ -24,7 +24,7 @@ class CreateReferenceAffiliatsTable extends Migration
             $table->string('address', 256)->nullable();
             $table->string('city', 40)->nullable();
             $table->string('state_code', 20)->nullable();
-            $table->integer('zip_code',10)->nullable();         
+            $table->integer('zip_code')->nullable();         
             $table->datetime('agreement_completion_date')->nullable();
             $table->string('pandadoc_id', 64)->nullable();  
             $table->integer('reference_affiliate_status_master_id')->default(1)->index();
@@ -33,14 +33,14 @@ class CreateReferenceAffiliatsTable extends Migration
             $table->integer('completed_by')->nullable();
             $table->datetime('completed_date')->nullable();
             $table->integer('pandadoc_version')->nullable();
-            $table->boolean('is_active')->nullable();
+            $table->boolean('is_active')->default(1);
             $table->boolean('is_delete')->default(0);
             $table->boolean('is_deferred')->default(0);
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('company_master_id')->references('id')->on('company_master');
-            $table->foreign('reference_affiliate_status_master_id')->references('id')->on('reference_affiliate_status_master');
+            // $table->foreign('company_master_id')->references('id')->on('company_master');
+            // $table->foreign('reference_affiliate_status_master_id')->references('id')->on('reference_affiliate_status_master');
         });
     }
 

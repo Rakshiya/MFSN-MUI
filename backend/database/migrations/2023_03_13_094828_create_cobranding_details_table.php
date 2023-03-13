@@ -30,9 +30,9 @@ class CreateCobrandingDetailsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('company_master_id')->references('id')->on('company_master');
-            $table->foreign('aid_master_id')->references('id')->on('aid_master');
-            $table->foreign('base_pid_plans_id')->references('id')->on('base_pid_plans_id');
+            // $table->foreign('company_master_id')->references('id')->on('company_master');
+            // $table->foreign('aid_master_id')->references('id')->on('aid_master');
+            // $table->foreign('base_pid_plans_id')->references('id')->on('base_pid_plans_id');
         });
     }
 
