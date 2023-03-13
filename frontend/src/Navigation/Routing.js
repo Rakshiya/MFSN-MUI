@@ -10,6 +10,7 @@ import CompanyDetails from '../views/Web/CompanyPanel/CompanyDetails';
 import BankDetails from '../views/Web/CompanyPanel/BankDetails';
 import HotLeads from '../views/Web/ManageLeadsPanel/HotLeads';
 import Details from '../views/Web/ManageLeadsPanel/Details';
+import ApprovedNow from '../views/Web/ManageLeadsPanel/ApprovedNow';
 import UserList from '../views/Web/UserPanel/UserList';
 import CreateUser from '../views/Web/UserPanel/CreateUser';
 import CrcReport from '../views/Web/ManageLeadsPanel/CrcReport';
@@ -29,6 +30,7 @@ function Routing(props) {
                 <Route path="/BankDetails" element={<BankDetails/>} />
                 <Route path="/manageleads" element={<HotLeads/>}/>
                 <Route path="/details" element={<Details/>}/>
+                <Route path="/approvednow" element={<ApprovedNow/>}/>
                 <Route path="/userpanel" element={<UserList/>}/>
                 <Route path="/createuser" element={<CreateUser/>}/>
                 <Route path="/crcreport" element={<CrcReport/>}/>
