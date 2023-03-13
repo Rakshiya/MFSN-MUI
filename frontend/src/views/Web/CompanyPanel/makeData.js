@@ -1,13 +1,22 @@
 import { Employee } from './CompanyPanel';
-
+import Chip from '@mui/material/Chip';
+import AddIcon from '@mui/icons-material/Add';
+import ClearIcon from '@mui/icons-material/Clear';
+import {
+  IconButton,
+} from '@mui/material';
 export const data: Employee[] = [
   {
     firstName: 'Dusty',
     lastName: 'Kuvalis',
-    email: 'Randy63@yahoo.com',
+    email: <Chip label="Active" size="small" color="primary" />,
     jobTitle: 'Chief Creative Technician',
-    salary: 52729,
-    startDate: '3/20/2014',
+    salary: <IconButton color="primary" >
+    <AddIcon />
+  </IconButton>,
+    startDate: <IconButton color="error" >
+    <ClearIcon />
+  </IconButton>,
     signatureCatchPhrase: 'Cross-platform disintermediate workforce',
     avatar:
       'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/106.jpg',

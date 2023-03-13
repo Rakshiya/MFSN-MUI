@@ -16,20 +16,25 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->integer('event_by')->nullable();
-            $table->string('name',100);
+            $table->integer('roles_id')->nullable()->index();
+            $table->integer('company_master_id')->nullable()->index();
+            $table->string('name',100)->nullable();
             $table->string('first_name', 50)->nullable();
             $table->string('last_name', 50)->nullable();
-            $table->string('email',64)->unique();
+            $table->string('email',64)->unique()->index();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('phone_no',15)->nullable();
             $table->string('default_timezone',5)->nullable();
-            $table->integer('company_id')->nullable();
-            
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('user_role',50)->nullable();
+            $table->boolean('is_active')->default(1);
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
-            $table->boolean('is_delete')->default(0);
+
+            
+            $table->foreign('roles_id')->references('id')->on('roles');
+            $table->foreign('company_master_id')->references('id')->on('company_master');
+
         });
     }
 
