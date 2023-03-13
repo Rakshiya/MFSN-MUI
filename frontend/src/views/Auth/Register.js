@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Container,Box,Grid,Paper,styled,TextField,Button,Card,Link,CardContent,Typography, Stack   } from '@mui/material';
 import { textAlign } from '@mui/system';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
+import AuthUser from "../../Components/Auth/AuthUser";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -12,6 +14,136 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
   }));
 function Register(props) {
+
+
+
+    const { http, getToken } = AuthUser();
+    const [sumbitbtntext,setSumbitbtntext] = useState('Register');
+    const [successMessage, setSuccessMessage] = useState();
+    const [otpstatus,setOtpstatus] = useState(false);
+    const [error, setError] = useState();
+    const [loading, setLoader]= useState('');
+    const referral_code = useParams();
+    const [fieldError, setFieldError] = useState([]);
+
+
+    //register function start
+
+
+    const RegisterSubmit = (values) => {
+
+        console.log(values);
+        setSumbitbtntext('Please wait...')
+        
+        http
+        .post("/register", {
+          first_name: values.firstName,
+          last_name: values.lastName,
+          business_name: values.NameofBusiness,
+          company_website: values.CompanyWebsite,
+          title: values.Title,
+          business_started_year: values.YearBusinessStarted,
+          email: values.Email,
+          phone_no: values.PhoneNumber,
+          address: values.StreetAddress,
+          referral_code: values.MyFreeScoreNowReferralCode,
+          city: values.City,
+          state_code: values.State,
+          zip_code: values.ZipCode,
+          marketing_type: values.SoftwareUsed,
+        })
+        .then((res) => {
+          if (res.data.success === true) {
+            document.getElementById("submitbtn").classList.remove("d-none");
+            setSuccessMessage(res.data.message.success);
+            setSumbitbtntext("Verify OTP");
+            document.getElementById("otpinput").style.display = "block";
+           // document.getElementById("captchainput").classList.add('d-none');
+            setOtpstatus(true);
+            setError("");
+            setLoader('');
+  
+          } else {
+             document.getElementById("submitbtn").classList.remove("d-none");
+             console.log(res.data.message);
+            // setFieldError(res.data.message);
+             setError(res.data.message.error);
+            // setLoader('');
+            // setSumbitbtntext('Register')
+          } 
+        })
+        .catch((error) => {
+           document.getElementById("submitbtn").classList.remove("d-none");
+           setError(error.message);
+           setLoader('');
+           setSuccessMessage("");
+           setSumbitbtntext('Register')
+        });
+
+    }
+
+
+    //register function ends
+
+
+
+      //Verify OTP Function
+  const Verifyemail = (values) =>{
+
+   
+
+
+    if(values.otpinput != '' && values.otpinput != null && values.otpinput != undefined){
+        
+        setSumbitbtntext('Please wait...')
+        document.getElementById("submitbtn").classList.add('d-none');
+        http.post('/register',{
+            first_name: values.firstName,
+            last_name: values.lastName,
+            business_name: values.NameofBusiness,
+            company_website: values.CompanyWebsite,
+            title: values.Title,
+            business_started_year: values.YearBusinessStarted,
+            email: values.Email,
+            phone_no: values.PhoneNumber,
+            address: values.StreetAddress,
+            referral_code: values.MyFreeScoreNowReferralCode,
+            city: values.City,
+            state_code: values.State,
+            zip_code: values.ZipCode,
+            marketing_type: values.SoftwareUsed,
+            otp:values.otpinput}).then((res)=>{
+          
+          if(res.data.success === true){
+            document.getElementById("signupform").style.display = "none";
+            document.getElementById("signupcomplete").style.display = "block";
+            setSuccessMessage(res.data.message.success);
+           
+            setError("");
+            setLoader('');
+          }else{
+            
+            console.log(res.data.message);
+            setFieldError(res.data.message);
+            setError(res.data.message.error);
+            setSuccessMessage("");
+            setLoader('');
+          }
+        }).catch(error => {
+          document.getElementById("submitbtn").classList.remove('d-none');
+          setError(error.message);
+          setSuccessMessage("");
+          setLoader('');
+        });
+      }else{
+       
+          setError("OTP is required");
+          setSuccessMessage("");
+          setLoader('');
+      }
+  }
+
+
 
 
 
@@ -125,14 +257,26 @@ function Register(props) {
                     <Item>
                         <Button variant="contained"  color="warning" size="large">Register Now</Button>
                     </Item>
-                    <Box>
+                   
+                </Item>
+            </Box>
+            <Box style={{display: "none"}} id="signupcomplete">
+                        <Item>
+                            <h2>{successMessage}</h2>
+                        </Item>
+            </Box>
+
+
+
+            <Box >
                         <Item>
                             <h2>We’re open 7 days/week. Live agent support</h2>
                         </Item>
-                    </Box>
-                </Item>
             </Box>
-            <Box sx={{ width: '100%' }}>
+
+
+
+            <Box sx={{ width: '100%' }}  id="signupform">
                 <Item>
 
   
@@ -143,11 +287,11 @@ function Register(props) {
                     </Grid>
                     {/* <Grid item xs={6}> */}
                                             
-                        <Box noValidate sx={{ mt: 1 }}>
+                        <Box noValidate sx={{ mt: 1 }} >
                         
                         <Formik 
                                 initialValues={{
-                                             firstName:'',
+                                            firstName:'',
                                             lastName:'',
                                             NameofBusiness:'',
                                             CompanyWebsite:'',
@@ -167,8 +311,9 @@ function Register(props) {
                                 validationSchema={SignupSchema}
                                 // onSubmit={() => { console.log("submit!"); }}
                                 onSubmit={(values,errors) => {
-                                    console.log('hi'+JSON.stringify(values));
-                                    alert('hi');
+
+                                    otpstatus ? Verifyemail(values) : RegisterSubmit(values);
+                                   
                                 }}
                                 
                             >
@@ -401,16 +546,41 @@ function Register(props) {
                                     { touched.SoftwareUsed &&  errors.SoftwareUsed ? <div className='error'>{ errors.SoftwareUsed}</div> : null}
                                 </Grid>
                             </Grid>
+
+                            <Grid container spacing={2} mt={1}  display="none"
+                                    id="otpinput">
+                                <Grid item xs={12} sm={12} >
+                                    <TextField
+                                    autoComplete="given-name"
+                                    name="otpinput"
+                                    onChange={ handleChange('otpinput')}
+                                    value={ values.otpinput}
+                                    fullWidth
+                                    size="small"
+                                   
+                                    label="Please enter OTP"
+                                    
+                                    />
+                                    
+                                </Grid>
+                            </Grid>
+
+
                                         <Button
                                         type="submit"
                                         onClick={handleSubmit}
                                         fullWidth
                                         variant="contained"
+                                        className=''
+                                        id="submitbtn"
                                         
                                         sx={{ mt: 3, mb: 2 }}
                                         >
-                                        Register Now
+                                        {sumbitbtntext}
                                     </Button>
+                                    {loading}
+                                    <p className="text text-success">{successMessage}</p>
+                                    <p className="text text-danger">{error}</p>
                                 </div>
 
                                 )}
