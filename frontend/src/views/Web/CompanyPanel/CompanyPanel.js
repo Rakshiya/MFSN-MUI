@@ -20,9 +20,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 // import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-//Icons Imports
-import { AccountCircle, Send } from '@mui/icons-material';
-
 
 
 //Icons Imports
@@ -207,7 +204,7 @@ setFilterCompany(result);
             id: 'Programe_Details',
             header: 'Programe Details',
             columns: [
-
+              {
                 accessorKey: 'salary', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
                 enableClickToCopy: true,
                 header: 'Bank Details',
