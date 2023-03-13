@@ -13,6 +13,7 @@ import Details from '../views/Web/ManageLeadsPanel/Details';
 import UserList from '../views/Web/UserPanel/UserList';
 import CreateUser from '../views/Web/UserPanel/CreateUser';
 import CrcReport from '../views/Web/ManageLeadsPanel/CrcReport';
+import CobrandPanel from '../views/Web/CobrandPanel/CobrandPanel';
 function Routing(props) {
     return (
         <BrowserRouter>
@@ -31,6 +32,7 @@ function Routing(props) {
                 <Route path="/userpanel" element={<UserList/>}/>
                 <Route path="/createuser" element={<CreateUser/>}/>
                 <Route path="/crcreport" element={<CrcReport/>}/>
+                <Route path="/cobrandpanel" element={<CobrandPanel />}/>
             </Routes>
         </BrowserRouter>
     );
