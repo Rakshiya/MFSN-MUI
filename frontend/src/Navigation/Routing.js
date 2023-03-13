@@ -6,6 +6,8 @@ import Register from '../views/Auth/Register';
 import Dashboard from '../views/Web/Dashboard/Dashboard';
 import AppSidebar from '../Components/AppSidebar';
 import CompanyPanel from '../views/Web/CompanyPanel/CompanyPanel';
+import CompanyDetails from '../views/Web/CompanyPanel/CompanyDetails';
+import BankDetails from '../views/Web/CompanyPanel/BankDetails';
 import HotLeads from '../views/Web/ManageLeadsPanel/HotLeads';
 import Details from '../views/Web/ManageLeadsPanel/Details';
 import UserList from '../views/Web/UserPanel/UserList';
@@ -15,6 +17,7 @@ import CobrandPanel from '../views/Web/CobrandPanel/CobrandPanel';
 function Routing(props) {
     return (
         <BrowserRouter>
+        
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
@@ -22,6 +25,8 @@ function Routing(props) {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/sidebar" element={<AppSidebar />} />
                 <Route path="/companypanel" element={<CompanyPanel/>} />
+                <Route path="/companydetails" element={<CompanyDetails/>} />
+                <Route path="/BankDetails" element={<BankDetails/>} />
                 <Route path="/manageleads" element={<HotLeads/>}/>
                 <Route path="/details" element={<Details/>}/>
                 <Route path="/userpanel" element={<UserList/>}/>

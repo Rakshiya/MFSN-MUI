@@ -216,6 +216,7 @@ function CrcReport(props) {
                     
                     </DialogActions>
                 </Dialog>
+                
             </Box>
         );
     }
