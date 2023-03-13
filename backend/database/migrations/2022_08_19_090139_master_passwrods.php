@@ -14,9 +14,10 @@ class MasterPasswrods extends Migration
     public function up() 
     {
         Schema::create('master_passwords', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
             $table->string('master_password',255)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
