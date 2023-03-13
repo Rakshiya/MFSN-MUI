@@ -14,11 +14,12 @@ class Otplogs extends Migration
     public function up()
     {
         Schema::create('otplogs', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
             $table->string('email',64)->nullable();
             $table->integer('otp')->nullable();
             $table->boolean('otpstatus')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

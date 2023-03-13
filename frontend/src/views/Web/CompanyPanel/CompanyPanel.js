@@ -3,7 +3,6 @@ import DefaultLayout from '../../../Components/DefaultLayout';
 import AuthUser from '../../../Components/Auth/AuthUser';
 //MRT Imports
 import MaterialReactTable from 'material-react-table';
-
 //Material-UI Imports
 import {
   Box,
@@ -11,7 +10,7 @@ import {
   ListItemIcon,
   MenuItem,
   Typography,
-  TextField,
+  TextField,Tooltip,IconButton
 } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -25,6 +24,10 @@ import { AccountCircle, Send } from '@mui/icons-material';
 
 
 
+//Icons Imports
+import { AccountCircle, Send ,Delete, Edit} from '@mui/icons-material';
+//Mock Data
+import { data } from './makeData';
 function CompanyPanel() {
 
 
@@ -108,8 +111,8 @@ setFilterCompany(result);
               {
                 accessorFn: (row) => `${row.company_name}`, //accessorFn used to join multiple data into a single cell
                 id: 'name', //id is still required when using accessorFn instead of accessorKey
-                header: 'Name',
-                size: 250,
+                header: 'Company Name',
+                size: 150,
                 Cell: ({ renderedCellValue, row }) => (
                   <Box
                     sx={{
@@ -118,14 +121,6 @@ setFilterCompany(result);
                       gap: '1rem',
                     }}
                   >
-                    <img
-                      alt="avatar"
-                      height={30}
-                      src={row.original.avatar}
-                      loading="lazy"
-                      style={{ borderRadius: '50%' }}
-                    />
-                    {/* using renderedCellValue instead of cell.getValue() preserves filter match highlighting */}
                     <span>{renderedCellValue}</span>
                   </Box>
                 ),
@@ -270,9 +265,32 @@ setFilterCompany(result);
                 //     />
                 //   </LocalizationProvider>
                 // ),
+                accessorKey: 'salary', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+                enableClickToCopy: true,
+                header: 'Bank Details',
+                size: 150,
+              },
+              {
+                accessorKey: 'email', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+                enableClickToCopy: true,
+                header: 'Status',
+                size: 150,
+              },
+              {
+                accessorKey: 'startDate', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+                enableClickToCopy: true,
+                header: 'Referral Program',
+                size: 150,
+              },
+              {
+                accessorKey: 'email', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+                enableClickToCopy: true,
+                header: 'Register Date',
+                size: 150,
               },
             ],
           },
+          
         ],
         [],
       );
@@ -299,13 +317,6 @@ if(fetchCompanyList){
               alignItems: 'center',
             }}
           >
-            <img
-              alt="avatar"
-              height={200}
-              src={row.original.avatar}
-              loading="lazy"
-              style={{ borderRadius: '50%' }}
-            />
             <Box sx={{ textAlign: 'center' }}>
               <Typography variant="h4">Signature Catch Phrase:</Typography>
               <Typography variant="h1">
@@ -314,82 +325,14 @@ if(fetchCompanyList){
             </Box>
           </Box>
         )}
-        renderRowActionMenuItems={({ closeMenu }) => [
-          <MenuItem
-            key={0}
-            onClick={() => {
-              // View profile logic...
-              closeMenu();
-            }}
-            sx={{ m: 0 }}
-          >
-            <ListItemIcon>
-              <AccountCircle />
-            </ListItemIcon>
-            View Profile
-          </MenuItem>,
-          <MenuItem
-            key={1}
-            onClick={() => {
-              // Send email logic...
-              closeMenu();
-            }}
-            sx={{ m: 0 }}
-          >
-            <ListItemIcon>
-              <Send />
-            </ListItemIcon>
-            Send Email
-          </MenuItem>,
-        ]}
-        renderTopToolbarCustomActions={({ table }) => {
-          const handleDeactivate = () => {
-            table.getSelectedRowModel().flatRows.map((row) => {
-              alert('deactivating ' + row.getValue('name'));
-            });
-          };
-  
-          const handleActivate = () => {
-            table.getSelectedRowModel().flatRows.map((row) => {
-              alert('activating ' + row.getValue('name'));
-            });
-          };
-  
-          const handleContact = () => {
-            table.getSelectedRowModel().flatRows.map((row) => {
-              alert('contact ' + row.getValue('name'));
-            });
-          };
-  
-          return (
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <Button
-                color="error"
-                disabled={!table.getIsSomeRowsSelected()}
-                onClick={handleDeactivate}
-                variant="contained"
-              >
-                Deactivate
-              </Button>
-              <Button
-                color="success"
-                disabled={!table.getIsSomeRowsSelected()}
-                onClick={handleActivate}
-                variant="contained"
-              >
-                Activate
-              </Button>
-              <Button
-                color="info"
-                disabled={!table.getIsSomeRowsSelected()}
-                onClick={handleContact}
-                variant="contained"
-              >
-                Contact
-              </Button>
-            </div>
-          );
-        }}
+        renderRowActions={({ row, table }) => (
+          <Box sx={{ display: 'flex', gap: '1rem' }}>
+            {/* <Tooltip arrow placement="left" title="Edit"> */}
+            <Button variant="outlined">Details</Button>
+            {/* </Tooltip> */}
+          </Box>
+        )}
+       
       />
     );
 }else{

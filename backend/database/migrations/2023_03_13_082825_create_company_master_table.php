@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CompanyMaster extends Migration 
+class CreateCompanyMasterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CompanyMaster extends Migration
      */
     public function up()
     {
-        Schema::create('company_masters', function (Blueprint $table) {
-            $table->id('company_id');
+        Schema::create('company_master', function (Blueprint $table) {
+            $table->id();
+            $table->integer('event_by')->nullable();
             $table->string('company_name', 100);
             $table->string('company_website',100)->nullable();
             $table->string('title',50)->nullable();
@@ -37,6 +38,7 @@ class CompanyMaster extends Migration
             $table->boolean('snapshot_flag')->default(0);
             $table->integer('company_status')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -47,6 +49,6 @@ class CompanyMaster extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('company_master');
     }
 }

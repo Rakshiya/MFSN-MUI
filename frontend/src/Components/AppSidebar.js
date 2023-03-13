@@ -18,6 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import Button from '@mui/material/Button';
 import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
 
 const drawerWidth = 320;
@@ -120,6 +121,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
           <Typography variant="h6" noWrap component="div">
             Mini variant drawer
           </Typography>
+          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
       {/* <BrowserRouter> */}

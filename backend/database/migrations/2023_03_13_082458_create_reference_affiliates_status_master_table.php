@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AidMasters extends Migration
+class CreateReferenceAffiliatesStatusMasterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class AidMasters extends Migration
      */
     public function up()
     {
-        Schema::create('aid_masters', function(Blueprint $table){
-            $table->id('aid_id');
-            $table->string('aid',50)->nullable();
-            $table->integer('company_id')->nullable();
-            $table->boolean('aid_status')->default(0);
+        Schema::create('reference_affiliates_status_master', function (Blueprint $table) {
+            $table->id();
+            $table->string('status_name',50);
             $table->timestamps();
-        }); 
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -29,6 +28,6 @@ class AidMasters extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('reference_affiliates_status_master');
     }
 }
