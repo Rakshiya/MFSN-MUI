@@ -12,6 +12,7 @@ import {
   Typography,
   TextField,Tooltip,IconButton
 } from '@mui/material';
+
 import CircularProgress from '@mui/material/CircularProgress';
 
 //Date Picker Imports
@@ -25,6 +26,9 @@ import { AccountCircle, Send } from '@mui/icons-material';
 
 
 //Icons Imports
+
+//Icons Imports
+
 import { AccountCircle, Send ,Delete, Edit} from '@mui/icons-material';
 //Mock Data
 import { data } from './makeData';
@@ -133,6 +137,7 @@ setFilterCompany(result);
             header: 'Banking Details',
             columns: [
               {
+
                 accessorKey: 'salary',
                 filterVariant: 'range',
                 header: 'Salary',
@@ -202,43 +207,27 @@ setFilterCompany(result);
             id: 'Programe_Details',
             header: 'Programe Details',
             columns: [
+
+                accessorKey: 'salary', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+                enableClickToCopy: true,
+                header: 'Bank Details',
+                size: 150,
+              },
+
               {
-                accessorKey: 'salary',
-                filterVariant: 'range',
-                header: 'Salary',
-                size: 200,
-                //custom conditional format and styling
-                Cell: ({ cell }) => (
-                  <Box
-                    component="span"
-                    sx={(theme) => ({
-                      backgroundColor:
-                        cell.getValue() < 50_000
-                          ? theme.palette.error.dark
-                          : cell.getValue() >= 50_000 && cell.getValue() < 75_000
-                          ? theme.palette.warning.dark
-                          : theme.palette.success.dark,
-                      borderRadius: '0.25rem',
-                      color: '#fff',
-                      maxWidth: '9ch',
-                      p: '0.25rem',
-                    })}
-                  >
-                    {cell.getValue()?.toLocaleString?.('en-US', {
-                      style: 'currency',
-                      currency: 'USD',
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 0,
-                    })}
-                  </Box>
-                ),
+                accessorKey: 'email', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+                enableClickToCopy: true,
+                header: 'Status',
+                size: 150,
               },
               {
-                accessorKey: 'jobTitle', //hey a simple column for once
-                header: 'Job Title',
-                size: 350,
+                accessorKey: 'startDate', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+                enableClickToCopy: true,
+                header: 'Referral Program',
+                size: 150,
               },
               {
+
                 accessorFn: (row) => new Date(row.startDate), //convert to Date for sorting and filtering
                 id: 'startDate',
                 header: 'Start Date',
@@ -283,6 +272,8 @@ setFilterCompany(result);
                 size: 150,
               },
               {
+
+
                 accessorKey: 'email', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
                 enableClickToCopy: true,
                 header: 'Register Date',
