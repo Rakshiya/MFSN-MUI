@@ -135,10 +135,10 @@ setFilterCompany(result);
             columns: [
               {
 
-                accessorKey: 'salary',
+                accessorKey: 'Submitted',
                 filterVariant: 'range',
-                header: 'Salary',
-                size: 200,
+                header: 'Submitted',
+                size: 150,
                 //custom conditional format and styling
                 Cell: ({ cell }) => (
                   <Box
@@ -167,15 +167,14 @@ setFilterCompany(result);
               },
               {
                 accessorKey: 'jobTitle', //hey a simple column for once
-                header: 'Job Title',
-                size: 350,
+                header: 'ACH Added',
+                size: 150,
               },
               {
                 accessorFn: (row) => new Date(row.startDate), //convert to Date for sorting and filtering
                 id: 'startDate',
-                header: 'Start Date',
-                filterFn: 'lessThanOrEqualTo',
-                sortingFn: 'datetime',
+                header: 'Actions',
+               
                 Cell: ({ cell }) => cell.getValue()?.toLocaleDateString(), //render Date as a string
                 Header: ({ column }) => <em>{column.columnDef.header}</em>, //custom header markup
                 //Custom Date Picker Filter from @mui/x-date-pickers
@@ -207,75 +206,17 @@ setFilterCompany(result);
               {
                 accessorKey: 'salary', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
                 enableClickToCopy: true,
-                header: 'Bank Details',
+                header: 'Credit Snap Shot',
                 size: 150,
               },
 
               {
                 accessorKey: 'email', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
                 enableClickToCopy: true,
-                header: 'Status',
+                header: 'Referal Programe',
                 size: 150,
               },
-              {
-                accessorKey: 'startDate', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
-                enableClickToCopy: true,
-                header: 'Referral Program',
-                size: 150,
-              },
-              {
 
-                accessorFn: (row) => new Date(row.startDate), //convert to Date for sorting and filtering
-                id: 'startDate',
-                header: 'Start Date',
-                filterFn: 'lessThanOrEqualTo',
-                sortingFn: 'datetime',
-                Cell: ({ cell }) => cell.getValue()?.toLocaleDateString(), //render Date as a string
-                Header: ({ column }) => <em>{column.columnDef.header}</em>, //custom header markup
-                //Custom Date Picker Filter from @mui/x-date-pickers
-                // Filter: ({ column }) => (
-                //   <LocalizationProvider dateAdapter={AdapterDayjs}>
-                //     <DatePicker
-                //       onChange={(newValue) => {
-                //         column.setFilterValue(newValue);
-                //       }}
-                //       renderInput={(params) => (
-                //         <TextField
-                //           {...params}
-                //           helperText={'Filter Mode: Lesss Than'}
-                //           sx={{ minWidth: '120px' }}
-                //           variant="standard"
-                //         />
-                //       )}
-                //       value={column.getFilterValue()}
-                //     />
-                //   </LocalizationProvider>
-                // ),
-                accessorKey: 'salary', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
-                enableClickToCopy: true,
-                header: 'Bank Details',
-                size: 150,
-              },
-              {
-                accessorKey: 'email', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
-                enableClickToCopy: true,
-                header: 'Status',
-                size: 150,
-              },
-              {
-                accessorKey: 'startDate', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
-                enableClickToCopy: true,
-                header: 'Referral Program',
-                size: 150,
-              },
-              {
-
-
-                accessorKey: 'email', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
-                enableClickToCopy: true,
-                header: 'Register Date',
-                size: 150,
-              },
             ],
           },
           
@@ -287,13 +228,15 @@ setFilterCompany(result);
 if(fetchCompanyList){
     return (
         <MaterialReactTable
+        
         columns={columns}
         data={filterCompany}
+        enableRowActions
         enableColumnFilterModes
         enableColumnOrdering
         enableGrouping
         enablePinning
-        enableRowActions
+        
         enableRowSelection
         initialState={{ showColumnFilters: false }}
         positionToolbarAlertBanner="bottom"
