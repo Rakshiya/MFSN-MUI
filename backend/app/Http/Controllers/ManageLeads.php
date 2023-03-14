@@ -27,12 +27,15 @@ class ManageLeads extends Controller
 {
     //Send Agreemen to Affiliate 
     public function sendAgreement(Request $request){
-
-        $affiliate_data = ReferenceAffiliates::select('reference_affiliates.*',
+      
+       $affiliate_data = ReferenceAffiliates::select('reference_affiliates.*',
         'company_masters.company_name',)
         ->leftJoin('company_masters', 'reference_affiliates.company_id',
         '=', 'company_masters.company_id')->where('refernce_affiliates_id', $request->id)->first();
 
+       
+      
+   
             // vR3m3KL297kHfNe5yKaUQB
             // //Json Data to send pandadoc agreement
             
@@ -95,8 +98,8 @@ class ManageLeads extends Controller
                 }
             }
         }';
-
-        
+print_r($jsondata);
+        exit();
         // //Create Pandadoc Document for affiliate
         $documentId = createPostPanda($jsondata);
 
