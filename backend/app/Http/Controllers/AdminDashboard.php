@@ -42,5 +42,6 @@ class AdminDashboard extends Controller
             // "months"=>$months
         ];
         return response()->json($chartData);
+        
     }
 }
